@@ -3,6 +3,11 @@ const express = require("express");
 //creating expressjs instance as app
 const app = express();
 //listening the app(server) at port no 3000 you can use any number (basically runnning the server at port no 3000 and call back function returns a message)
+
+//using body parser for fetching data from body of post request
+const bodyParser = require("body-parser");
+//specifically parse json data and add it to the request body
+app.use(bodyParser.json());
 app.listen(3000, () => {
   console.log("Server started at port no 3000");
 });
@@ -19,8 +24,8 @@ app.get("/", (req, res) => {
 });
 
 //here the post request only contains the data which shoudld be submitted to the database
-app.post("api/cars", (req, res) => {
-  const { name, brand } = request.body; //fetching data from request body;
+app.post("/api/cars", (req, res) => {
+  const { name, brand } = req.body; //fetching data from request body;
   console.log(name, brand);
   res.send("CAR SUBMITTED SUCCESSFULLY");
 });
